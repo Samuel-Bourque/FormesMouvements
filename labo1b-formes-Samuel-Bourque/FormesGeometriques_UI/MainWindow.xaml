@@ -1,0 +1,59 @@
+﻿<Window x:Class="FormesGeometriques_UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FormesGeometriques_UI"
+        mc:Ignorable="d"
+        Title="3Q5-Labo #1b" Height="400" Width="400" ResizeMode="NoResize">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <TextBlock DockPanel.Dock="Left" Text="-- X -- " VerticalAlignment="Center"/>
+            <Slider DockPanel.Dock="Right" 
+                    Margin="40,0,25,0"  
+                    TickFrequency="10" 
+                    Minimum="10" 
+                    Maximum="280" 
+                    SmallChange="10"
+                    IsSnapToTickEnabled="True"
+                    TickPlacement="BottomRight"
+                    Name="sliderHaut"
+                />
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Left">
+            <TextBlock DockPanel.Dock="Bottom" 
+                       Text="-- Y - -"/>
+            <Slider DockPanel.Dock="Top" 
+                    Margin="10,30,10,20" 
+                    TickFrequency="10" 
+                    Minimum="10" 
+                    Maximum="270" 
+                    SmallChange="10"
+                    IsSnapToTickEnabled="True" 
+                    IsDirectionReversed="True"
+                    Orientation="Vertical"
+                    TickPlacement="BottomRight"
+                    Name="sliderGauche"
+                    />
+        </DockPanel>
+        <Canvas Background="Lime">
+            <Rectangle   
+                Canvas.Left="35" 
+                Canvas.Top="25"   
+                Height="{Binding ElementName=sliderGauche, Path=Value}"
+                Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}"   
+                Stroke="Black" 
+                StrokeThickness="2" 
+                Fill="Red"
+                />
+            <Ellipse Width="50" 
+                     Height="50" 
+                     Canvas.Left="{Binding ElementName=sliderHaut, Path=Value}" 
+                     Canvas.Top="{Binding ElementName=sliderGauche, Path=Value}"
+                     Stroke="Blue" 
+                     StrokeThickness="2"
+                     Fill="{Binding Path=Background, RelativeSource={RelativeSource AncestorType={x:Type Canvas}}}"
+                     />
+        </Canvas>
+    </DockPanel>
+</Window>
